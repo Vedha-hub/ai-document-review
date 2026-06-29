@@ -1,72 +1,74 @@
 # Product Requirements Document: CampusRide
 
 ## 1. Executive Summary
-CampusRide is a mobile-first ride-sharing application designed exclusively for university and college ecosystems. Unlike commercial incumbents like Uber or Lyft, CampusRide fosters a community-centric model that prioritizes verified student safety, cost-effective micro-transfers, and social connection. The platform enables students to share rides to local off-campus apartments, regional transit hubs, or weekend excursions. By leveraging ".edu" email verification, we create a "trusted network" environment that mitigates the risks associated with ride-sharing with strangers. 
+CampusRide is a specialized, hyper-local ride-sharing platform designed exclusively for college and university environments. Unlike generic, high-cost ride-hailing services (e.g., Uber or Lyft) that prioritize professional drivers, CampusRide facilitates peer-to-peer transportation, allowing students with cars to offer rides to fellow students needing transit to classes, off-campus housing, or local transit hubs. 
 
-The value proposition is two-fold: it provides an affordable transportation solution for students living on tight budgets and reduces the carbon footprint of the campus by encouraging carpooling. We will launch initially as a pilot at three major universities with high commuter populations. Our business model focuses on a low-transaction-fee structure and, eventually, campus-integrated partnerships for university events. By positioning CampusRide as the "official" campus transit partner, we solve the lingering mobility gap that occurs during late-night hours when campus shuttles are unavailable, while simultaneously fostering a sense of shared community among the student body.
+The core value proposition is affordability, safety, and community building. By leveraging university-issued email addresses (e.g., .edu domains), the platform creates a verified "walled garden" that fosters trust among users. CampusRide addresses the specific pain points of the student demographic, such as limited budget, lack of parking on campus, and the need for reliable transport during late-night study sessions or weekend events. The app will feature real-time ride tracking, integrated cashless payments, and social verification badges. This product aims to reduce the carbon footprint of campus traffic, alleviate parking shortages, and provide a convenient mobility solution that integrates seamlessly into the academic lifestyle.
 
 ## 2. Problem Statement
-The modern college campus faces a significant "last-mile" transportation crisis. Public transit is often unreliable, campus shuttles stop running before library hours conclude, and private ride-sharing services have become prohibitively expensive for students due to surge pricing and high booking fees. Furthermore, for many students, the lack of a vehicle creates a social barrier, limiting their ability to visit off-campus housing or engage in regional internships. 
+The modern college campus is plagued by three primary issues: parking scarcity, high transportation costs, and limited mobility. Many students living off-campus struggle with the unreliability of public transit systems, which often fail to align with erratic class schedules or late-night extracurricular obligations. Conversely, commercial ride-sharing services are prohibitively expensive for students on fixed budgets, often charging surge pricing that makes daily commuting unsustainable. 
 
-Existing solutions fail to account for the unique safety requirements of the student body. Women and minority students often express anxiety when getting into vehicles with unknown civilian drivers. Additionally, there is a lack of trust in the vetting processes of commercial apps. Because there is currently no dedicated marketplace for student-to-student rides, many students resort to informal, unverified coordination via group chats (e.g., WhatsApp or GroupMe), which lack safety tracking, payment integration, and liability protections. This creates a fragmented, risky, and inefficient environment where students are either stranded, paying exorbitant prices, or participating in unsafe, undocumented transportation arrangements. CampusRide addresses this by professionalizing the student-peer commute.
+Furthermore, current ride-sharing platforms offer no sense of community or vetting relevant to the student experience. Students are often wary of getting into cars with complete strangers. There is a clear market gap for a secure, community-driven platform where the driver and passenger are connected through a shared academic identity. Without this, students continue to rely on fragmented social media groups (like Facebook "Ride Board" pages) which lack real-time tracking, secure payment gateways, and safety accountability. This inefficiency leads to missed classes, isolation for students living in remote housing, and a massive waste of resources. CampusRide exists to formalize this ecosystem, providing a safe, affordable, and technologically modern bridge for student mobility.
 
 ## 3. User Personas
 
 **Persona 1: The Commuter Student**
-*   **Name:** Marcus, 21
-*   **Occupation:** Junior, Engineering Major
-*   **Goals:** Save money on daily travel from his apartment to the Engineering building; avoid parking permit costs.
-*   **Frustrations:** Campus bus schedules don't align with his lab hours; commercial ride apps cost $15–$20 per trip, which he cannot afford daily.
+*   **Name:** Sarah Jenkins
+*   **Age:** 20
+*   **Occupation:** Junior, Psychology Major
+*   **Goals:** Get to her 8:00 AM lectures on time without paying $20+ for a commercial ride or searching for parking for 30 minutes.
+*   **Frustrations:** Public buses are infrequent and unreliable; she hates arriving at class stressed and late.
 
-**Persona 2: The Social Planner**
-*   **Name:** Sarah, 19
-*   **Occupation:** Sophomore, Liberal Arts
-*   **Goals:** Get to weekend concerts or regional shopping centers with friends safely.
-*   **Frustrations:** Fear of riding with unknown adult drivers; social anxiety about splitting costs/reimbursement among friend groups.
+**Persona 2: The Campus Driver**
+*   **Name:** Marcus Thorne
+*   **Age:** 22
+*   **Occupation:** Senior, Engineering Major
+*   **Goals:** Offset the cost of gas and car maintenance by picking up students along his usual commute route.
+*   **Frustrations:** Driving alone feels wasteful, and he finds the parking permit fees for his off-campus apartment to be a major financial drain.
 
 ## 4. User Stories
-1. **As a student**, I want to verify my account with my university email so that I am only riding with other verified members of my campus.
-2. **As a student driver**, I want to post my route in advance so that I can find passengers heading in the same direction.
-3. **As a rider**, I want to see the driver’s profile and mutual friends so that I feel comfortable getting into their vehicle.
-4. **As a user**, I want to split fares automatically within the app so that I don't have to chase people for gas money.
-5. **As a user**, I want a "Share My Ride" safety button so that my roommates can track my GPS location during the trip.
+1. **As a** student rider, **I want** to filter potential drivers by their verified university department **so that** I can ride with someone I share common ground with.
+2. **As a** student driver, **I want** to pre-set my daily commute route **so that** the app can automatically match me with riders heading in my direction.
+3. **As a** student rider, **I want** to see a safety badge on a driver's profile **so that** I feel confident about my physical safety during the ride.
+4. **As a** student, **I want** to pay via an in-app wallet **so that** I don't have to carry cash or handle complex split payments.
+5. **As a** user, **I want** to send an automatic "I'm on my way" alert with live tracking to a trusted contact **so that** my friends know I am safe.
 
 ## 5. Functional Requirements
-*   **FR-1:** App must require a valid .edu email domain to sign up and participate.
-*   **FR-2:** The system must include a driver-rating and passenger-rating feature after each completed ride.
-*   **FR-3:** App must allow drivers to set a recurring route (e.g., Daily commute from Apartment A to Campus B).
-*   **FR-4:** System must provide real-time GPS tracking shared with a pre-selected "Safety Contact."
-*   **FR-5:** The platform must integrate a payment gateway (Stripe) to handle in-app fare splitting.
-*   **FR-6:** App must have an "In-App Chat" feature that masks personal phone numbers for privacy.
-*   **FR-7:** The system shall display the driver’s car make, model, and license plate number upon ride acceptance.
-*   **FR-8:** App must allow administrators to flag and ban users who violate community safety guidelines.
+*   **FR-1:** The app must verify user identity via a valid .edu email address before allowing ride requests.
+*   **FR-2:** The app shall allow drivers to set static recurring routes (e.g., Mon-Fri, 7:30 AM).
+*   **FR-3:** The system must implement a real-time GPS tracking interface for active rides.
+*   **FR-4:** The payment engine must support peer-to-peer splitting of ride costs to keep trips affordable.
+*   **FR-5:** The platform shall include a two-way rating system (1–5 stars) and a reporting feature for inappropriate behavior.
+*   **FR-6:** The app must provide an "SOS/Emergency" button that shares location with campus security.
+*   **FR-7:** The system shall allow riders to request a ride for a future time slot, not just on-demand.
+*   **FR-8:** The platform shall implement a push notification service for ride status updates (Driver arriving, Rider picked up, Trip complete).
 
 ## 6. Non-Functional Requirements
-*   **Performance:** The app must load ride availability in under 2 seconds.
-*   **Security:** All user data (including email and payment info) must be encrypted using AES-256 standards.
-*   **Scalability:** The backend infrastructure must support up to 10,000 concurrent users per campus during peak hours (e.g., Friday nights).
-*   **Availability:** The system must maintain 99.9% uptime to ensure reliability during critical transit times.
+*   **Performance:** The app must load ride search results in under 2 seconds.
+*   **Security:** All user data (including PII and location history) must be encrypted using AES-256; authentication must require MFA.
+*   **Scalability:** The backend must support concurrent requests for up to 50,000 active students per campus.
+*   **Availability:** The service must maintain 99.9% uptime during peak campus hours (7 AM – 9 PM).
 
 ## 7. Success Metrics / KPIs
-1. **Daily Active Users (DAU):** Achieve 500 active users per pilot campus within the first 30 days.
-2. **Ride Completion Rate:** Maintain a 95% completion rate (rides requested vs. rides successfully finished).
-3. **Safety Incidents:** Target 0 reported physical safety incidents per 10,000 rides.
-4. **User Acquisition Cost (UAC):** Keep acquisition cost below $2.00 per user through university marketing channels.
+*   **Adoption Rate:** Achieve 25% of the total student population registered as active users within the first 6 months.
+*   **Match Efficiency:** Ensure 70% of requested rides find a driver match within 10 minutes.
+*   **Safety Rating:** Maintain an average user safety rating of 4.8/5.0 across all rides.
+*   **Cost Savings:** Demonstrate an average cost reduction of 60% compared to commercial ride-hailing services for the same route.
 
 ## 8. Edge Cases and Risk Analysis
-1. **Risk:** Students using the app for non-campus purposes. *Mitigation:* Implement geofencing to limit start/end points to the campus vicinity.
-2. **Risk:** Driver doesn't show up. *Mitigation:* Implement a "No-Show" reporting tool that penalizes driver ratings.
-3. **Risk:** Misuse of the chat function. *Mitigation:* Automated AI-based keyword filtering to block harassment/inappropriate language.
-4. **Risk:** Liability regarding student accidents. *Mitigation:* Mandatory Terms of Service agreement stating the app acts as a connector, not a transit employer.
+*   **Risk 1:** A driver or rider acts inappropriately. *Mitigation:* Zero-tolerance policy, permanent bans, and an immediate reporting loop to campus safety.
+*   **Risk 2:** High traffic density during finals week causing server crashes. *Mitigation:* Implement auto-scaling clusters on cloud infrastructure (e.g., AWS EKS).
+*   **Risk 3:** Users circumventing the app to pay outside the platform. *Mitigation:* Gamify the "In-App" experience with rewards and loyalty points for using official payment channels.
+*   **Risk 4:** Insurance liability issues in the event of an accident. *Mitigation:* Require all drivers to acknowledge legal disclaimers and recommend supplemental ride-sharing insurance coverage.
 
 ## 9. Technical Specifications
-*   **Tech Stack:** React Native (Frontend), Node.js/Express (Backend), PostgreSQL (Database).
-*   **Architecture:** Microservices architecture to isolate ride-matching, user profiles, and payment processing.
-*   **APIs:** Google Maps API for geolocation/routing; Stripe API for payments; Twilio API for SMS alerts.
-*   **Database:** AWS RDS (PostgreSQL) for relational data, Redis for caching active ride sessions.
+*   **Tech Stack:** React Native (Frontend), Node.js/Express (Backend), PostgreSQL (Relational Data), Redis (Caching/Real-time GPS).
+*   **Architecture:** Microservices-based architecture to handle independent scaling of the Authentication, Matching, and Payment services.
+*   **APIs:** Google Maps API (Directions/Geocoding), Stripe API (Payments), Twilio API (SMS verification/Notifications).
+*   **Database:** PostgreSQL for persistent user and ride history; MongoDB for unstructured chat logs and driver route preferences.
 
 ## 10. Timeline and Milestones
-*   **Milestone 1 (Oct 1):** Completion of MVP design and architecture approval.
-*   **Milestone 2 (Nov 15):** Beta launch at Pilot University 1 (internal testing with 50 students).
-*   **Milestone 3 (Jan 15):** Full public launch at three regional universities.
-*   **Milestone 4 (Mar 1):** Performance audit and rollout of "Premium" safety features based on user feedback.
+*   **Milestone 1 (Oct 1st):** Completion of UI/UX wireframes and university authentication API integration.
+*   **Milestone 2 (Nov 15th):** Beta launch at one pilot university (minimum viable product for 500 users).
+*   **Milestone 3 (Dec 20th):** Performance optimization and final bug fixes based on student feedback.
+*   **Milestone 4 (Jan 15th):** Official V1.0 launch across 5 major partner universities.
