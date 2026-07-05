@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from typing import TypedDict, Optional
 from agents.writer_agent import run_writer_agent
 from agents.critic_agent import run_critic_agent
