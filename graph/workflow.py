@@ -88,22 +88,29 @@ def build_graph():
 
 
 if __name__ == '__main__':
-    print("Building graph...")
     graph = build_graph()
     
-    print("Running workflow...")
-    result = graph.invoke({
-        'raw_input': 'Build a food delivery app for students.',
-        'current_draft': '',
-        'critic_feedback': {},
-        'iteration_count': 0,
-        'status': 'drafting',
-        'final_document': None
-    })
+    test_inputs = [
+        'Build a hospital appointment booking app',
+        'Build an e-commerce app for handmade crafts',
+        'Build a fitness tracking app for gym members'
+    ]
     
-    print("\n=== WORKFLOW COMPLETE ===")
-    print(f"Total iterations: {result['iteration_count']}")
-    print(f"Final score: {result['critic_feedback'].get('score')}")
-    print(f"Status: {result['status']}")
-    print("\n=== FINAL DOCUMENT ===")
-    print(result['final_document'])
+    for idea in test_inputs:
+        print(f"\n{'='*50}")
+        print(f"Testing: {idea}")
+        print('='*50)
+        
+        result = graph.invoke({
+            'raw_input': idea,
+            'current_draft': '',
+            'critic_feedback': {},
+            'iteration_count': 0,
+            'status': 'drafting',
+            'final_document': None
+        })
+        
+        print(f"Score: {result['critic_feedback'].get('score')}")
+        print(f"Status: {result['status']}")
+        print(f"Iterations: {result['iteration_count']}")
+        print(f"Approved: {result['status'] == 'approved'}")
