@@ -53,3 +53,54 @@ def finalize_node(state: DocumentState) -> DocumentState:
         'final_document': state['current_draft'],
         'status': 'approved'
     }
+def should_revise(state: DocumentState) -> str:
+    fb = state.get('critic_feedback', {})
+    score = fb.get('score', 0)
+    iters = state.get('iteration_count', 0)
+    if fb.get('status') == 'approved' and score >= 75:
+        return 'approved'
+    elif iters >= MAX_ITERATIONS:
+        return 'approved'
+    return 'revise'
+
+
+def build_graph():
+    from langgraph.graph import StateGraph, END
+    
+    wf = StateGraph(DocumentState)
+    
+    wf.add_node('writer', writer_node)
+    wf.add_node('critic', critic_node)
+    wf.add_node('finalize', finalize_node)
+    
+    wf.set_entry_point('writer')
+    wf.add_edge('writer', 'critic')
+    wf.add_edge('finalize', END)
+    wf.add_conditional_edges('critic', should_revise, {
+        'approved': 'finalize',
+        'revise': 'writer'
+    })
+    
+    return wf.compile()
+
+
+if __name__ == '__main__':
+    print("Building graph...")
+    graph = build_graph()
+    
+    print("Running workflow...")
+    result = graph.invoke({
+        'raw_input': 'Build a food delivery app for students.',
+        'current_draft': '',
+        'critic_feedback': {},
+        'iteration_count': 0,
+        'status': 'drafting',
+        'final_document': None
+    })
+    
+    print("\n=== WORKFLOW COMPLETE ===")
+    print(f"Total iterations: {result['iteration_count']}")
+    print(f"Final score: {result['critic_feedback'].get('score')}")
+    print(f"Status: {result['status']}")
+    print("\n=== FINAL DOCUMENT ===")
+    print(result['final_document'])
