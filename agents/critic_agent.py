@@ -1,3 +1,5 @@
+# Week 4 - Day 16: Verified FastAPI server runs successfully
+# critic_agent with Function Calling integrated into FastAPI backend
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
