@@ -26,3 +26,16 @@ Python 3.11 | LangGraph | Google Gemini API | FastAPI | Pydantic
 ## Team
 Vedha — Writer Agent, LangGraph workflow, DocumentState
 Sirisha — Critic Agent, JSON parsing, prompt engineering
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /api/v1/generate-document | Generate PRD from rough notes |
+| POST | /api/v1/approve-document/{doc_id} | Approve a generated document |
+| POST | /api/v1/reject-document/{doc_id} | Reject a generated document |
+| GET | /api/v1/pending-approvals | List all pending documents |
+
+## Testing
+Run the server: uvicorn api.main:app --reload --port 8000
+Open Swagger UI: http://localhost:8000/docs
