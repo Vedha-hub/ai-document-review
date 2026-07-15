@@ -52,38 +52,39 @@ review_function = types.FunctionDeclaration(
 )
 
 def run_critic_agent(prd_text: str) -> dict:
-    client = genai.Client(api_key=os.getenv('GEMINI_API_KEY'))
-    
-    prompt = load_prompt('critic_system_prompt.txt')
-    
-    tool = types.Tool(function_declarations=[review_function])
-    
-    response = client.models.generate_content(
-        model='gemini-flash-lite-latest',
-        contents=f"{prompt}\n\nReview this PRD:\n{prd_text}",
-        config=types.GenerateContentConfig(
-            tools=[tool],
-            tool_config=types.ToolConfig(
-                function_calling_config=types.FunctionCallingConfig(
-                    mode='ANY',
-                    allowed_function_names=['submit_prd_review']
+    try:
+        client = genai.Client(api_key=os.getenv('GEMINI_API_KEY'))
+        
+        prompt = load_prompt('critic_system_prompt.txt')
+        
+        tool = types.Tool(function_declarations=[review_function])
+        
+        response = client.models.generate_content(
+            model='gemini-flash-lite-latest',
+            contents=f"{prompt}\n\nReview this PRD:\n{prd_text}",
+            config=types.GenerateContentConfig(
+                tools=[tool],
+                tool_config=types.ToolConfig(
+                    function_calling_config=types.FunctionCallingConfig(
+                        mode='ANY',
+                        allowed_function_names=['submit_prd_review']
+                    )
                 )
             )
         )
-    )
+        
+        for part in response.candidates[0].content.parts:
+            if part.function_call:
+                return dict(part.function_call.args)
+                
+    except Exception as e:
+        print(f"Critic agent error: {str(e)}")
     
-    # Extract function call result directly
-    for part in response.candidates[0].content.parts:
-        if part.function_call:
-            # Returns clean dict — no JSON parsing needed!
-            return dict(part.function_call.args)
-    
-    # Fallback if function call not found
     return {
         "status": "needs_revision",
         "score": 0,
         "missing_sections": ["Unable to get structured response"],
-        "feedback": ["Function calling failed"],
+        "feedback": [f"Error: {str(e)}"],
         "approval_message": "Error in critic response"
     }
 
