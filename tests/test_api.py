@@ -16,8 +16,7 @@ def test_endpoints_exist():
 if __name__ == '__main__':
     test_endpoints_exist()
     print("✅ API tests passed!")
-
-    # Week 4 - Day 19: Final testing complete
+    
 # All endpoints verified via Swagger UI
 # System tested end to end successfully
 
