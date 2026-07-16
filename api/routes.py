@@ -13,26 +13,32 @@ pending = {}
 
 @router.post('/generate-document')
 def generate_document(req: DocumentRequest):
-    graph = build_graph()
-    result = graph.invoke({
-        'raw_input': req.raw_input,
-        'current_draft': '',
-        'critic_feedback': {},
-        'iteration_count': 0,
-        'status': 'drafting',
-        'final_document': None
-    })
-    
-    doc_id = f'doc_{len(pending) + 1}'
-    pending[doc_id] = result
-    
-    return {
-        'doc_id': doc_id,
-        'draft': result['current_draft'],
-        'score': result['critic_feedback'].get('score'),
-        'status': result['status'],
-        'iterations': result['iteration_count']
-    }
+    try:
+        graph = build_graph()
+        result = graph.invoke({
+            'raw_input': req.raw_input,
+            'current_draft': '',
+            'critic_feedback': {},
+            'iteration_count': 0,
+            'status': 'drafting',
+            'final_document': None
+        })
+        
+        doc_id = f'doc_{len(pending) + 1}'
+        pending[doc_id] = result
+        
+        return {
+            'doc_id': doc_id,
+            'draft': result['current_draft'],
+            'score': result['critic_feedback'].get('score'),
+            'status': result['status'],
+            'iterations': result['iteration_count']
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f'Error generating document: {str(e)}'
+        )
 
 @router.post('/approve-document/{doc_id}')
 def approve(doc_id: str):
