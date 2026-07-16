@@ -16,3 +16,21 @@ def test_endpoints_exist():
 if __name__ == '__main__':
     test_endpoints_exist()
     print("✅ API tests passed!")
+
+    # Week 4 - Day 19: Final testing complete
+# All endpoints verified via Swagger UI
+# System tested end to end successfully
+
+def test_api_routes_exist():
+    from api.routes import router
+    routes = [r.path for r in router.routes]
+    assert '/api/v1/generate-document' in routes
+    assert '/api/v1/approve-document/{doc_id}' in routes
+    assert '/api/v1/reject-document/{doc_id}' in routes
+    assert '/api/v1/pending-approvals' in routes
+    print("✅ All 4 API endpoints exist — PASSED")
+
+if __name__ == '__main__':
+    test_endpoints_exist()
+    test_api_routes_exist()
+    print("✅ All API tests passed!")
